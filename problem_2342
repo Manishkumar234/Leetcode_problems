@@ -1,0 +1,19 @@
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        def get_digit_sum(n):
+            res = 0
+            while n :
+                res += n % 10
+                n //= 10
+            return res
+        
+        digit_sum = defaultdict(list)
+        for num in nums:
+            digit_sum[get_digit_sum(num)].append(num)
+
+        max_sum = -1
+
+        for sum_, num_list in digit_sum.items():
+            if len(num_list) > 1:
+                max_sum = max(max_sum, sum(heapq.nlargest(2, num_list)))
+        return max_sum
