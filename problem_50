@@ -1,0 +1,17 @@
+class Solution:
+  def myPow(self, x: float, n: int) -> float:
+    
+    def me(ex=x,po=abs(n)):
+      if po==0:
+        return 1
+      elif po%2==0:
+        return me(ex*ex,po//2)
+      else:
+        return ex*me(ex*ex,(po-1)//2)
+      
+
+    power=me()
+    if n>=0:
+      return power
+    else:
+      return 1/power
